@@ -1,5 +1,6 @@
 <template>
   <v-layout>
+    <!-- menu per la navigazione nel sito -->
     <v-navigation-drawer
       style="position: fixed; top: 0; left: 0; overflow-y: scroll"
       absolute
@@ -10,12 +11,12 @@
     >
       <v-list>
         <v-list-item @click="toggleTheme">
-          <v-list-item-title>
+          <template v-slot:prepend>
             <v-icon start>
               <svg-icon type="mdi" :path="mdiThemeLightDark"></svg-icon>
             </v-icon>
-            Theme mode
-          </v-list-item-title>
+          </template>
+          Cambia tema
         </v-list-item>
 
         <v-list-item to="/home">
@@ -64,12 +65,10 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
+    <!-- /menu -->
 
     <v-app-bar style="position: fixed; overflow-y: scroll" class="elevation-0" color="transparent">
       <v-app-bar-nav-icon class="me-2" @click="activeDrawer = !activeDrawer"></v-app-bar-nav-icon>
-      <v-spacer></v-spacer>
-
-      <v-spacer></v-spacer>
     </v-app-bar>
 
     <v-main>
@@ -109,7 +108,7 @@ html {
 
 /* Scroll bar stylings */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 10px;
+  width: 0px;
+  height: 0px;
 }
 </style>

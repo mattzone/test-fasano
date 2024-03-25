@@ -1,3 +1,7 @@
+<!--
+  Index
+  Pagina iniziale del sito
+-->
 <template>
   <v-fade-transition appear>
     <v-container class="fill-height d-flex align-center">
@@ -15,7 +19,9 @@
 
           <div class="py-4 elevation-0"></div>
 
+          <!-- mostra tutte le sezioni del sito -->
           <v-row>
+            <!-- TemperatureChartCard -->
             <v-hover v-slot:default="{ isHovering, props }">
               <v-col :class="[isLargeScreen ? 'v-col-6' : 'v-col-12']">
                 <v-card
@@ -28,11 +34,14 @@
                   rounded="lg"
                   subtitle="Visaluzza le temperature in italia"
                   title="Temperature"
-                  :color="isHovering ? 'primary' : isDarkMode ? undefined : 'gray-lighten-4'"
+                  :color="isHovering ? 'primary' : undefined"
                 >
                 </v-card>
               </v-col>
             </v-hover>
+            <!-- /TemperatureChartCard -->
+
+            <!-- UmiditaChartCard -->
             <v-hover v-slot:default="{ isHovering, props }">
               <v-col :class="[isLargeScreen ? 'v-col-6' : 'v-col-12']">
                 <v-card
@@ -45,11 +54,14 @@
                   subtitle="Visaluzza le umidita in italia"
                   title="Umidita"
                   v-bind="props"
-                  :color="isHovering ? 'primary' : isDarkMode ? undefined : 'gray-lighten-4'"
+                  :color="isHovering ? 'primary' : undefined"
                 >
                 </v-card>
               </v-col>
             </v-hover>
+            <!-- /UmiditaChartCard -->
+
+            <!-- PressioneChartCard -->
             <v-hover v-slot:default="{ isHovering, props }">
               <v-col :class="[isLargeScreen ? 'v-col-6' : 'v-col-12']">
                 <v-card
@@ -62,11 +74,14 @@
                   subtitle="Visaluzza le pressioni atmosferiche in italia"
                   title="Pressione"
                   v-bind="props"
-                  :color="isHovering ? 'primary' : isDarkMode ? undefined : 'gray-lighten-4'"
+                  :color="isHovering ? 'primary' : undefined"
                 >
                 </v-card>
               </v-col>
             </v-hover>
+            <!-- PressioneChartCard -->
+
+            <!-- VentoChartCard -->
             <v-hover v-slot:default="{ isHovering, props }">
               <v-col :class="[isLargeScreen ? 'v-col-6' : 'v-col-12']">
                 <v-card
@@ -79,11 +94,12 @@
                   subtitle="Visaluzza la velocità del vento in italia"
                   title="Vento"
                   v-bind="props"
-                  :color="isHovering ? 'primary' : isDarkMode ? undefined : 'gray-lighten-4'"
+                  :color="isHovering ? 'primary' : undefined"
                 >
                 </v-card>
               </v-col>
             </v-hover>
+            <!-- /VentoChartCard -->
           </v-row>
         </v-responsive>
       </v-row>

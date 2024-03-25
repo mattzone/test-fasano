@@ -1,3 +1,8 @@
+<!-- 
+  VentoChartCard
+  In questa pagine viene mostrata tramite un grafico la velocità del vento delle province italiane.
+  L'utente può selezionare la regione desiderata
+ -->
 <template>
   <v-card class="h-100 elevation-0 mt-5" color="transparent">
     <v-fade-transition appear>
@@ -7,6 +12,7 @@
         </v-icon>
         Velocità del vento in m/s province regioni italiane
 
+        <!-- combobox per la ricerca delle regioni -->
         <v-row align="center" class="my-5">
           <v-combobox
             v-model="selectedRegion"
@@ -25,18 +31,23 @@
           >
           </v-btn>
         </v-row>
+        <!-- /combobox -->
       </v-card-title>
     </v-fade-transition>
 
     <v-fade-transition appear>
       <v-card-text class="w-100">
+        <!-- grafico di tipo Pie -->
         <Pie v-if="loaded && chartData" :data="chartData" :options="chartOptions" />
+
+        <!-- div da mostrare prima della selezione -->
         <div v-if="!loaded" class="text-center pt-5">
           <h1 class="text-body font-weight-bold text-secondary">Selezionare una regione</h1>
           <p class="text-caption mt-5 font-weight-bold text-secondary">
             Per poter visualizzare velocità del vento in m/s selezionare la regione desiderata
           </p>
         </div>
+        <!-- /div -->
       </v-card-text>
     </v-fade-transition>
   </v-card>
@@ -77,13 +88,15 @@ export default {
     async onSearch() {
       let provinceSelected = provinceList[this.selectedRegion];
 
-      // Array di promesse per le chiamate asincrone
+      // Array di chiamate asincrone
       let promises = provinceSelected.map(async provincia => {
+        // Recupera i dettagli della provincia ( lat e lon )
         let provinciaDetails = await fetch(
           `http://api.openweathermap.org/geo/1.0/direct?q=${provincia}&limit=5&appid=${this.apiKey}`,
         );
         let provinciaDetailsData = await provinciaDetails.json();
 
+        // Recupera il meteo della provincia
         let provinciaWeather = await fetch(
           `https://api.openweathermap.org/data/2.5/weather?lat=${provinciaDetailsData[0].lat}&lon=${provinciaDetailsData[0].lon}&appid=${this.apiKey}=metric`,
         );
@@ -91,12 +104,12 @@ export default {
 
         return {
           label: provincia,
-          umidity: provinciaWeatherData.main.humidity,
+          umidity: provinciaWeatherData.main.humidity, // Restituisce la pressione
           color: this.randomColor(),
         };
       });
 
-      // Aspetta che tutte le promesse vengano risolte
+      // Aspetta che tutte le chiamate vengano completate
       let results = await Promise.all(promises);
 
       // Estrae i dati e le labels
