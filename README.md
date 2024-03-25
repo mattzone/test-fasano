@@ -54,7 +54,7 @@ Il sito è stato sviluppato utilizzando [Vuejs](https://vuejs.org/) insieme al f
 
 Per i grafici è stata utilizzata la libreria [vue-chartjs](https://vue-chartjs.org/)
 
-## 💿 Install
+## 💿 Installazione e deploy
 
 Per installare e utilizzare il progetto in locale si può utilizzare npm o docker + nginx
 | NPM | |
